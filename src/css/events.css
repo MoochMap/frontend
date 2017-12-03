@@ -12,11 +12,12 @@ p {
 
 
 .card {
-  margin: 20px;
+  margin: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  display: inline-block;
+  display: table;
   float: left;
+
 }
 
 .card-holder:after {
@@ -43,7 +44,7 @@ p {
   width: auto;
 }
 
-.card-img Button {
+.card-img #follow {
   margin-top: 5px;
   margin-right: 15px;
   color: white;

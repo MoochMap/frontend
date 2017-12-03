@@ -22,12 +22,11 @@ const Event = (data, {onClick}) => {
       const contextTypes = {
         router: PropTypes.object
       }
-
       if (isFollowing)
         isFollowing = 0;
       else {
         isFollowing = 1;
-      }
+        console.log("following")      }
 
       console.log(e.target.value);
       const name = {
@@ -43,6 +42,31 @@ const Event = (data, {onClick}) => {
       });
       window.location.reload();
     }
+    function deleteEvent(e) {
+
+      const contextTypes = {
+        router: PropTypes.object
+      }
+
+      var name = {
+        name: e.target.value,
+        creator: e.target.id
+      }
+
+      apiPost('/deleteevent', name).then((response) => {
+        if (response.success) {
+          window.location.reload();
+        } else {
+          console.log(response.message);
+        }
+      });
+    }
+
+    var isOwner = 0;
+
+    if (data.creator === data.username) {
+      isOwner = 1;
+    }
 
     var isFollowing = 0;
     for (var i = 0; i < data.following.length; i++) {
@@ -53,6 +77,8 @@ const Event = (data, {onClick}) => {
     var edate = (new Date(data.date)).toLocaleString();
     var currentdate = new Date();
 
+
+    if ((data.home && isFollowing) || !data.home || isOwner) {
     return(
       <div>
       {Date.parse(currentdate) > Date.parse(data.date) ?null:
@@ -64,6 +90,8 @@ const Event = (data, {onClick}) => {
             <p>Creator: {data.creator}</p>
           </div>
           <div class="card-img">
+
+
             { data.type === "Chipotle" ?
               <img alt="" alt=""id="logo" src={chipotle} />:null
             }
@@ -83,18 +111,29 @@ const Event = (data, {onClick}) => {
                 <img alt="" alt=""id="logo" src={mystery} />:null
             }
             <br/>
-            {isFollowing === 1 ?
-            <Link to={"/events"} refresh={"true"}> <Button value={data.name} onClick={clickFollow} >Unfollow</Button></Link>
+            { isOwner ?
+              <Button value={data.name} id={data.creator} onClick={deleteEvent} bsStyle="danger" >X</Button>
+              :
+              null
+            }
+            {isFollowing === 1?
+              <Button id="follow" value={data.name} onClick={clickFollow} >Unfollow</Button>
             :
-            <Link to={"/events"} refresh="true"><Button value={data.name} onClick={clickFollow} >Follow</Button></Link>
+              <Button id="follow" value={data.name} onClick={clickFollow} >Follow</Button>
             }
           </div>
-
 
         </div>
       }
       </div>
     )
+  } else {
+    return(
+      <div>
+      </div>
+    );
+  }
+
 }
 
 

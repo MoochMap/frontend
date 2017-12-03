@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Nav from '../UI/Nav';
 import { Button, Form, Navbar } from 'react-bootstrap'
 import { apiGet } from '../api.js';
+import Event from './event';
 
 import '../css/events.css';
 
@@ -10,19 +11,24 @@ class home extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { events: null };
+    this.state = { events: [{}], following:[{}], username: {} };
   }
 
 
   componentWillMount () {
     apiGet('/getevents').then((data) => {
-      console.log("test");
       if (data.success) {
-        this.setState ({events: data.message});
-
+        this.setState ({events: data.events});
       } else {
         sessionStorage.setItem('error', data.message);
-        console.log(data);
+      }
+    });
+    apiGet('/getuser').then((data) => {
+      if (data.success) {
+        this.setState ({username: data.username});
+        this.setState ({following: data.following});
+      } else {
+        sessionStorage.setItem('error', data.message);
       }
     });
   }
@@ -41,10 +47,19 @@ class home extends Component {
     }
   }
   render(){
+    const {events} = this.state;
+    const {following} = this.state;
+    const {username} = this.state;
+    console.log(following);
     return (
       <div>
         <Nav onClick={this.navclick}/>
-        {this.state.events}<br/>
+        <h1>Your Upcoming Events</h1>
+        <div id="card-holder">
+          { events.map(function(event) {
+            return <Event home={1} username={username} name={event.name} type={event.type} location={event.location} date={event.date} time={event.time} creator={event.creator} following={following}/>
+          }) }
+        </div>
       </div>
     );
   };

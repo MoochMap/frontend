@@ -9,7 +9,7 @@ import { Button, Form, FormGroup, FormControl } from 'react-bootstrap'
 class signup extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {apiError: null};
   }
 
@@ -24,7 +24,7 @@ class signup extends Component {
     })
   }
 
-  login = () => {
+  signup = () => {
     const credentials = {
       username: this.state.username,
       password: this.state.password

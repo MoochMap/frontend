@@ -14,7 +14,7 @@ class events extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { events: [{}], following:[{}] };
+    this.state = { events: [{}], following:[{}], username: {} };
   }
 
 
@@ -28,6 +28,7 @@ class events extends Component {
     });
     apiGet('/getuser').then((data) => {
       if (data.success) {
+        this.setState ({username: data.username});
         this.setState ({following: data.following});
       } else {
         sessionStorage.setItem('error', data.message);
@@ -37,7 +38,6 @@ class events extends Component {
 
 
    follow = (e) => {
-    console.log('fuck');
     apiPost('/followevent', e.target.value).then((response) => {
       if (response.success) {
         this.context.router.history.push('/events');
@@ -67,6 +67,7 @@ class events extends Component {
   render(){
     const {events} = this.state;
     const {following} = this.state;
+    const username = this.state.username;
     console.log(following);
     return (
       <div>
@@ -74,7 +75,7 @@ class events extends Component {
         <h1>Upcoming Events</h1>
         <div id="card-holder">
           { events.map(function(event) {
-            return <Event name={event.name} type={event.type} location={event.location} date={event.date} time={event.time} creator={event.creator} following={following}/>
+            return <Event home={0} username={username} name={event.name} type={event.type} location={event.location} date={event.date} time={event.time} creator={event.creator} following={following}/>
           }) }
         </div>
       </div>
