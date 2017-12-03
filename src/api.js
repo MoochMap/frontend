@@ -11,18 +11,18 @@ export function apiGet(endpoint) {
 }
 
 export function apiPost(endpoint, data = {}) {
-  const token = sessionStorage.getItem('token');
-  if (token)
-  data.push(token);
+  var token = sessionStorage.getItem('token');
   const options = {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'token': sessionStorage.getItem('token')
+      'token': token
     },
     body: JSON.stringify(data)
   }
+
+  console.log("fetching " + data);
 
   return fetch(`${API_URL}${endpoint}/`, options).then((res) => res.json());
 }

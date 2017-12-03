@@ -14,6 +14,7 @@ const Nav = ({onClick}) => {
             <div>
             <Button id='home' onClick={onClick} >Home</Button>
             <Button id='events' onClick={onClick} >Events</Button>
+            <Link to="/create"><Button id='events' bsStyle="success" onClick={onClick}>Create</Button></Link>
             <Button id='logout' style={{background: 'red', color: 'white'}} onClick={onClick} >Logout</Button>
             </div>
           : null}

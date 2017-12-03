@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Nav from '../UI/Nav';
+import { apiPost } from '../api.js';
 import { Button, Form, Navbar, Row, Thumbnail} from 'react-bootstrap'
 import { apiGet } from '../api.js';
 import '../css/events.css';
@@ -13,7 +14,7 @@ class events extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { events: [{}] };
+    this.state = { events: [{}], following:[{}] };
   }
 
 
@@ -25,8 +26,27 @@ class events extends Component {
         sessionStorage.setItem('error', data.message);
       }
     });
+    apiGet('/getuser').then((data) => {
+      if (data.success) {
+        this.setState ({following: data.following});
+      } else {
+        sessionStorage.setItem('error', data.message);
+      }
+    });
   }
 
+
+   follow = (e) => {
+    console.log('fuck');
+    apiPost('/followevent', e.target.value).then((response) => {
+      if (response.success) {
+        this.context.router.history.push('/events');
+      } else {
+        this.setState({ apiError: response.message });
+        sessionStorage.setItem('hey', response.message );
+      }
+    });
+  }
 
   navclick = (e) => {
     console.log(e.target.id);
@@ -43,17 +63,19 @@ class events extends Component {
   }
 
 
+
   render(){
     const {events} = this.state;
-    console.log(events);
+    const {following} = this.state;
+    console.log(following);
     return (
       <div>
         <Nav onClick={this.navclick}/>
         <h1>Upcoming Events</h1>
         <div id="card-holder">
           { events.map(function(event) {
-            return <Event name={event.name} description={event.description} type={event.type} location={event.location} date={event.date}  />
-          })}
+            return <Event name={event.name} type={event.type} location={event.location} date={event.date} time={event.time} creator={event.creator} following={following}/>
+          }) }
         </div>
       </div>
     );

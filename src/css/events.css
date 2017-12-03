@@ -34,7 +34,8 @@ p {
 }
 
 .card-img {
-  padding-top: 5px;
+  padding-top: 15px;
+  margin-top: 5px;
   float: left;
   margin: auto;
   margin-bottom: 0;
@@ -43,12 +44,21 @@ p {
 }
 
 .card-img Button {
+  margin-top: 5px;
   margin-right: 15px;
   color: white;
   background-color: #49AFC7;
 }
 
+.card-img Button:hover {
+  margin-top: 5px;
+  margin-right: 15px;
+  color: white;
+  background-color: #49AFA3;
+}
+
 .cardcontainer {
+  padding: 5px;
   background-color: #E9F6FC;
   color: black;
   float: left;
