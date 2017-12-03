@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { ARoute, NARoute } from './ARoute'
 import Home from './pages/home';
@@ -12,7 +12,7 @@ import Login from './pages/login';
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter>
         <div className="body">
           <div className="content">
             <Route exact path="/" component={ Login } />
@@ -23,7 +23,7 @@ class App extends Component {
               <ARoute path="/create" component={ Create } />
           </div>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }
