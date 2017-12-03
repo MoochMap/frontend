@@ -7,6 +7,7 @@ import Create from './pages/create';
 import Events from './pages/events'
 import Register from './pages/signup';
 import Login from './pages/login';
+import About from './pages/about';
 
 
 class App extends Component {
@@ -15,7 +16,7 @@ class App extends Component {
       <HashRouter>
         <div className="body">
           <div className="content">
-            <Route exact path="/" component={ Login } />
+            <Route exact path="/" component={ About } />
               <NARoute path="/signup" component={ Register } />
               <NARoute path="/login" component={ Login } />
               <ARoute path="/events" component={ Events } />

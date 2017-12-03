@@ -4,6 +4,7 @@ import Nav from '../UI/Nav';
 import { Button, Form, Navbar } from 'react-bootstrap'
 import { apiGet } from '../api.js';
 import Event from './event';
+import Calendar from '../UI/calendar';
 
 import '../css/events.css';
 
