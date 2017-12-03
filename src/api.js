@@ -1,4 +1,4 @@
-const API_URL = process.env.API_URL || 'http://localhost:5000';
+const API_URL = process.env.API_URL || 'https://moochmap.herokuapp.com';
 
 export function apiGet(endpoint) {
   const HEADERS = {
