@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter } from 'react-router-dom';
+import { HashRouter, BrowserRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { ARoute, NARoute } from './ARoute'
 import Home from './pages/home';

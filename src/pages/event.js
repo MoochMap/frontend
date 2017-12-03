@@ -34,13 +34,12 @@ const Event = (data, {onClick}) => {
       }
       apiPost('/followevent', name).then((response) => {
         if (response.success) {
-
+          window.location.reload();
         } else {
           this.setState({ apiError: response.message });
           sessionStorage.setItem('hey', response.message );
         }
       });
-      window.location.reload();
     }
     function deleteEvent(e) {
 

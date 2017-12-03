@@ -36,18 +36,6 @@ class events extends Component {
     });
   }
 
-
-   follow = (e) => {
-    apiPost('/followevent', e.target.value).then((response) => {
-      if (response.success) {
-        this.context.router.history.push('/events');
-      } else {
-        this.setState({ apiError: response.message });
-        sessionStorage.setItem('hey', response.message );
-      }
-    });
-  }
-
   navclick = (e) => {
     console.log(e.target.id);
     if (e.target.id === 'logout') {
