@@ -44,7 +44,7 @@ class login extends Component {
     return (
       <div>
         <Nav/>
-        <div className="login-form">
+        <div class="login-form">
           {this.state.apiError}
           <br/>
           <FormGroup bsSize="small">
