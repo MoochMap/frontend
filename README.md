@@ -1,5 +1,5 @@
 # frontend
-https://moochmap.github.io/frontend-react/#/
+https://moochmap.github.io/frontend/#/
 
 Mooch Map is a website designed to help Purdue Students eat as affordably as possible. How do we accomplish that? Its simple. Whenever a student hears about an event/callout that is offering free food they can post it on Mooch Map to spread the information. Mooch Map helps to provide exposure for clubs/events while also feeding poor College Students, its a win-win.
 
