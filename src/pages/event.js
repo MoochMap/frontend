@@ -41,6 +41,10 @@ const Event = (data, {onClick}) => {
         }
       });
     }
+    function clickCard(e) {
+      this.props.callbackFromParent(e);
+    }
+
     function deleteEvent(e) {
 
       const contextTypes = {
@@ -80,7 +84,7 @@ const Event = (data, {onClick}) => {
     return(
       <div>
       {Date.parse(currentdate) > Date.parse(data.date) ?null:
-        <div className="card" >
+        <div className="card"  >
 
           <div className="card-img">
 
