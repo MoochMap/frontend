@@ -36,7 +36,7 @@ const Event = (data, {onClick}) => {
         if (response.success) {
           window.location.reload();
         } else {
-          this.setState({ apiError: response.message });
+
           sessionStorage.setItem('hey', response.message );
         }
       });
@@ -76,19 +76,13 @@ const Event = (data, {onClick}) => {
     var edate = (new Date(data.date)).toLocaleString();
     var currentdate = new Date();
 
-
-    if ((data.home && isFollowing) || !data.home || isOwner) {
+  if ((data.home && isFollowing) || !data.home || isOwner) {
     return(
       <div>
       {Date.parse(currentdate) > Date.parse(data.date) ?null:
-        <div class="card" >
-          <div class="cardcontainer">
-            <h1>{data.name}</h1>
-            <p>Location: {data.location}</p>
-            <p>Date: {edate}</p>
-            <p>Creator: {data.creator}</p>
-          </div>
-          <div class="card-img">
+        <div className="card" >
+
+          <div className="card-img">
 
 
             { data.type === "Chipotle" ?
@@ -120,6 +114,16 @@ const Event = (data, {onClick}) => {
             :
               <Button id="follow" value={data.name} onClick={clickFollow} >Follow</Button>
             }
+          </div>
+          <div className="cardcontainer">
+            <h1>{data.name}</h1>
+            <p className="location"><p2>Location:</p2> {data.location}</p>
+            { data.locdesc != null ?
+              <p><p2>Room/Apt: </p2>{data.locdesc}</p>
+              : null
+            }
+            <p><p2>Date:</p2> {edate}</p>
+            <p><p2>Creator:</p2> {data.creator}</p>
           </div>
 
         </div>

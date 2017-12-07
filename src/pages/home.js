@@ -4,11 +4,29 @@ import Nav from '../UI/Nav';
 import { Button, Form, Navbar } from 'react-bootstrap'
 import { apiGet } from '../api.js';
 import Event from './event';
-import Calendar from '../UI/calendar';
-
 import '../css/events.css';
+import { GoogleMap, Marker, withScriptjs, withGoogleMap} from "react-google-maps"
+import _ from "lodash";
+import { compose, withProps } from "recompose";
+
+const Map = compose(
+  withProps({
+    googleMapURL:
+      "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places",
+    loadingElement: <div style={{ height: `100%` }} />,
+    containerElement: <div style={{ height: `400px` }} />,
+    mapElement: <div style={{ height: `100%` }} />
+  }),
+  withScriptjs,
+  withGoogleMap
+)(props => (
+  <GoogleMap defaultZoom={16} defaultCenter={{ lat: 40.4259, lng: -86.9081 }}>
+    <Marker position={{}} />
+  </GoogleMap>
+));
 
 class home extends Component {
+
   constructor(props) {
     super(props);
 
@@ -34,6 +52,10 @@ class home extends Component {
     });
   }
 
+  eventClick = (e) => {
+    console.log(e);
+  }
+
   navclick = (e) => {
     console.log(e.target.id);
     if (e.target.id === 'logout') {
@@ -55,12 +77,20 @@ class home extends Component {
     return (
       <div>
         <Nav onClick={this.navclick}/>
+
+
         <h1>Your Upcoming Events</h1>
-        <div id="card-holder">
-          { events.map(function(event) {
-            return <Event home={1} username={username} name={event.name} type={event.type} location={event.location} date={event.date} time={event.time} creator={event.creator} following={following}/>
+        <div className="card-holder">
+          { events.sort((a,b) => new Date(a.date) > new Date(b.date)).map(function(event) {
+            return <Event home={1} username={username} name={event.name} type={event.type}
+            location={event.location} locdesc={event.locdesc} date={event.date} time={event.time}
+            creator={event.creator} following={following}/>
           }) }
         </div>
+        <br/><br/><br/><br/><br/><br/><br/><br/>
+        <h1>Todays Event Map</h1>
+        <br/>
+        <Map />
       </div>
     );
   };

@@ -56,14 +56,15 @@ class events extends Component {
     const {events} = this.state;
     const {following} = this.state;
     const username = this.state.username;
-    console.log(following);
     return (
       <div>
         <Nav onClick={this.navclick}/>
         <h1>Upcoming Events</h1>
-        <div id="card-holder">
-          { events.map(function(event) {
-            return <Event home={0} username={username} name={event.name} type={event.type} location={event.location} date={event.date} time={event.time} creator={event.creator} following={following}/>
+        <div className="card-holder">
+          { events.sort((a,b) => new Date(a.date) > new Date(b.date)).map(function(event) {
+            return <Event home={0} username={username} name={event.name} type={event.type}
+            location={event.location} date={event.date} locdesc={event.locdesc}
+            time={event.time} creator={event.creator} following={following}/>
           }) }
         </div>
       </div>

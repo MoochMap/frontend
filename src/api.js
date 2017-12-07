@@ -1,4 +1,10 @@
-const API_URL = 'https://moochmap.herokuapp.com';
+var API_URL;
+if ('../../start.sh') {
+  API_URL =  'http://localhost:5000';
+}
+else {
+  API_URL = 'https://moochmap.herokuapp.com';
+}
 
 export function apiGet(endpoint) {
   const HEADERS = {
@@ -22,7 +28,6 @@ export function apiPost(endpoint, data = {}) {
     body: JSON.stringify(data)
   }
 
-  console.log("fetching " + data);
 
   return fetch(`${API_URL}${endpoint}/`, options).then((res) => res.json());
 }

@@ -5,14 +5,19 @@ import { Button, Form, Navbar, FormGroup, FormControl } from 'react-bootstrap'
 import { apiGet } from '../api.js';
 import '../css/create.css';
 import { apiPost } from '../api.js';
+import PlacesAutocomplete from 'react-places-autocomplete'
+import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete'
 
 import '../css/events.css';
 
 class create extends Component {
+
   constructor(props) {
     super(props);
 
     this.state = { apiError: null };
+    this.state = { address: '' }
+    this.onChange = (address) => this.setState({ address })
   }
 
 
@@ -35,7 +40,8 @@ class create extends Component {
       name: this.state.name,
       type: this.state.type,
       description: this.state.description,
-      location: this.state.location,
+      location: this.state.address,
+      locdesc: this.state.location,
       date: this.state.date,
       time: this.state.time
     }
@@ -95,17 +101,29 @@ class create extends Component {
     }
   }
   render(){
+    const inputProps = {
+      value: this.state.address,
+      onChange: this.onChange,
+    }
+
     return (
       <div>
         <Nav onClick={this.navclick}/>
-
         <div class="create-form">
           <FormGroup bsSize="small">
             {this.state.apiError}
             <br/>Event Info<br/>
             <FormControl type="name" placeholder="Event Name" onChange={this.name} className="margin-top"/>
             <FormControl type="description" placeholder="Description" onChange={this.description} className="margin-top"/>
-            <FormControl type="location" placeholder="Location" onChange={this.location} className="margin-top"/>
+
+            <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"></link>
+
+            <br/>Location<br/>
+            <div id="locationField">
+              <PlacesAutocomplete inputProps={inputProps} />
+            </div>
+            <FormControl type="location-description" placeholder="Room/Apt #" onChange={this.location} className="margin-top"/>
+
 
             <select type="type" onChange={this.type} className="margin-top select">
               <option value="" selected disabled hidden>What Kind of Food?</option>
