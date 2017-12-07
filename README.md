@@ -10,11 +10,18 @@ Mooch Map is a website designed to help Purdue Students eat as affordably as pos
   
   
 ## Frontend Setup (https://github.com/MoochMap/frontend)
- install yarn
+ 
+ In order to use localhost for backend 
+ ```
+ - open src/api.js
+ - replace var API_URL = 'https://moochmap.herokuapp.com' with var API_URL = 'http://localhost:5000'
+```
+
+ Install yarn
  ```
  npm install yarn
  ```
- run server with yarn
+ Run server with yarn
  ```
  yarn install
  yarn run start
