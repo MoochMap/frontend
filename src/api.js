@@ -1,10 +1,4 @@
-var API_URL;
-if ('../../start.sh') {
-  API_URL =  'http://localhost:5000';
-}
-else {
-  API_URL = 'https://moochmap.herokuapp.com';
-}
+var API_URL = 'https://moochmap.herokuapp.com';
 
 export function apiGet(endpoint) {
   const HEADERS = {
